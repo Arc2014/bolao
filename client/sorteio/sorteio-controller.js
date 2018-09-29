@@ -2,9 +2,9 @@
 
     'use strict';
 
-    module.controller('CartelaController', ['$scope', function ($scope) {
-        $scope.cartela = {};
-        $scope.cartelas = [];
+    module.controller('SorteioController', ['$scope', function ($scope) {
+        $scope.sorteio = {};
+        $scope.sorteios = [];
 
         $scope.imprimir = function imprimir() {
             console.log($scope.usuario);

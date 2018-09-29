@@ -10,6 +10,7 @@
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bolao.css">
     <!-- Font Awesome JS -->
 </head>
 
@@ -22,13 +23,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Resultado<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="#!/resultado">Resultado<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#">Gerar Sorteio</a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Sorteios</a>
+                <a class="nav-link" href="#!/sorteio">Sorteios</a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="#!/cartela">Cartelas</a>
@@ -36,14 +34,13 @@
         </ul>
     </div>
 </nav>
-<div class="container">
     <ng-view></ng-view>
-</div>
 <script type="text/javascript" src="../node_modules/angular/angular.min.js"></script>
 <script type="text/javascript" src="../node_modules/angular-resource/angular-resource.min.js"></script>
 <script type="text/javascript" src="../node_modules/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="app-angular.js"></script>
 <script type="text/javascript" src="cartela/cartela-controller.js"></script>
+<script type="text/javascript" src="sorteio/sorteio-controller.js"></script>
 <script type="text/javascript" src="master/master-controller.js"></script>
 </body>
 

@@ -1,8 +1,6 @@
 (function (module) {
     "use strict";
 
-    console.log(module);
-
     module.config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when("/", {
             templateUrl: "./master/master.html",
@@ -10,6 +8,9 @@
         }).when("/cartela", {
             templateUrl: "./cartela/cartela.html",
             controller: "CartelaController"
+        }).when("/sorteio", {
+            templateUrl: "./sorteio/sorteio.html",
+            controller: "SorteioController"
         });
     }]);
 

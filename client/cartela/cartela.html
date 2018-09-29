@@ -1,19 +1,74 @@
-<div class="row justify-content-center align-items-center">
+<div class="container mt-5">
     <form>
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" ng-model="usuario.email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                   placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        <div class="form-group row">
+            <label for="idCartela" class="col-sm-2 col-form-label">Código</label>
+            <div class="col-sm-10">
+                <input type="number" ng-model="cartela.id" class="form-control form-control-sm" id="idCartela"
+                       aria-describedby="qtdNumero" readonly/>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="nome" class="col-sm-2 col-form-label">Nome</label>
+            <div class="col-sm-10">
+                <input type="text" ng-model="cartela.nome" class="form-control form-control-sm" id="nome" ng-required="true"
+                       aria-describedby="nomeRequired">
+                <small id="nomeRequired" class="form-text text-muted"> Nome da cartela é de preenchimento obrigatório</small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="qtdNumero" class="col-sm-2 col-form-label">Quantidade de Números</label>
+            <div class="col-sm-10">
+                <input type="number" ng-model="cartela.qtdNumeros" class="form-control form-control-sm" id="qtdNumero"
+                       ng-required="true"
+                       aria-describedby="qtdNumeroRequired">
+                <small id="qtdNumeroRequired" class="form-text text-muted">A quantidade de Números na cartela é de preenchimento
+                    obrigatória.
+                </small>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Intervalo</label>
+            <div class="col-sm-3">
+                <label for="de" class="col-form-label">De</label>
+                <input id="de" type="number" ng-model="cartela.inicio" class="form-control form-control-sm" ng-required="true">
+            </div>
+            <div class="col-sm-3">
+                <label for="ate" class="col-form-label">Até</label>
+                <input id="ate" type="intervalo" ng-model="cartela.fim" class="form-control form-control-sm" ng-required="true">
+            </div>
         </div>
         <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" ng-model="usuario.password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="descricao">Descrição</label>
+            <textarea class="form-control" id="descricao" ng-model="cartela.descricao" rows="3"></textarea>
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">{{usuario.password}}</label>
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-primary" ng-click="imprimir()">Salvar</button>
         </div>
-        <button type="submit" class="btn btn-primary" ng-click="imprimir()">Submit</button>
     </form>
+
+    <div class="row mt-3 pt-3">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Qtd Numeros</th>
+                <th scope="col">Intervalo</th>
+                <th scope="col">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="ctl in cartelas">
+                <td>{{ctl.id}}</td>
+                <td>{{ctl.nome}}</td>
+                <td>{{ctl.qtdNumeros}}</td>
+                <td>{{ctl.inicio}} - {{ctl.fim}}</td>
+                <td>
+                    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Editar</a>
+                    <a href="#" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Deletar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
