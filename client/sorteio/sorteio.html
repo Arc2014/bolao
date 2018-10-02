@@ -1,9 +1,9 @@
 <div class="container mt-5">
-    <form>
+    <form name="sorteioForm" ng-if="isInsertOrUpdate">
         <div class="form-group row">
             <label for="numeroSerie" class="col-sm-2 col-form-label">Número de Série</label>
             <div class="col-sm-10">
-                <input type="number" ng-model="sorteio.numeroSerie" class="form-control form-control-sm" id="numeroSerie" readonly>
+                <input type="number" ng-model="sorteio.id" class="form-control form-control-sm" id="numeroSerie" readonly>
             </div>
         </div>
         <div class="form-group row">
@@ -16,9 +16,9 @@
         <div class="form-group row">
             <label for="cartela" class="col-sm-2 col-form-label">Cartela</label>
             <div class="col-sm-10">
-                <select id="cartela" ng-model="sorteio.cartela" class="form-control form-control-sm" ng-required="true">
-                    <option>Cartela 1</option>
-                    <option>Cartela 1</option>
+                <select id="cartela" ng-model="sorteio.cartela" ng-options="cartela as cartela.nome for cartela in cartelas track by cartela.id"
+                        class="form-control form-control-sm" ng-required="true">
+                    <option value="">Selecione...</option>
                 </select>
             </div>
         </div>
@@ -27,14 +27,21 @@
             <textarea class="form-control" id="descricaoValidade" ng-model="sorteio.descricaoValidade" rows="3"></textarea>
         </div>
         <div class="row justify-content-center">
-            <button type="submit" class="btn btn-primary" ng-click="imprimir()">Salvar</button>
+            <button type="submit" class="btn btn-primary" ng-disabled="sorteioForm.$invalid" ng-if="!sorteio.id" ng-click="salvar()">
+                Salvar
+            </button>
+            <button type="submit" class="btn btn-primary" ng-disabled="sorteioForm.$invalid" ng-if="sorteio.id" ng-click="atualizar()">
+                Atualizar
+            </button>
+            <button type="submit" class="btn btn-secondary ml-3" ng-if="!cartela.id" ng-click="voltar()">
+                Voltar
+            </button>
         </div>
     </form>
-    <div class="row mt-3 pt-3">
+    <div class="row mt-3 pt-3" ng-if="!isInsertOrUpdate">
         <table class="table table-striped table-sm">
             <thead>
             <tr>
-                <th scope="col">#</th>
                 <th scope="col">Nº de Série</th>
                 <th scope="col">Data do Sorteio</th>
                 <th scope="col">Cartela</th>
@@ -44,13 +51,13 @@
             <tbody>
             <tr ng-repeat="srt in sorteios">
                 <td>{{srt.id}}</td>
-                <td>{{srt.numeroSerie}}</td>
-                <td>{{srt.dataSorteio}}</td>
+                <td>{{srt.dataSorteio | date: "dd/MM/yyyy" }}</td>
                 <td>{{srt.cartela.nome}}</td>
                 <td>
-                    <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Editar</a>
-                    <a href="#" class="btn btn-danger btn-lg active" role="button" aria-pressed="true">Deletar</a>
-                    <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Imprimir</a>
+                    <a class="btn btn-primary btn-sm active" role="button" ng-click="novo(srt)" aria-pressed="true">Novo</a>
+                    <a class="btn btn-primary btn-sm active" role="button" ng-click="setEdicao(srt, $index)" aria-pressed="true">Editar</a>
+                    <a class="btn btn-danger btn-sm active" role="button" ng-click="remover(srt.id)" aria-pressed="true">Deletar</a>
+                    <a href="#" class="btn btn-secondary btn-sm active" role="button" aria-pressed="true">Imprimir</a>
                 </td>
             </tr>
             </tbody>
